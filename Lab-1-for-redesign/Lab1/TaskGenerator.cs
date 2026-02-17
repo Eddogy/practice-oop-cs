@@ -27,7 +27,7 @@ public class TaskGenerator
             // Spausdiname bloką (kopijuoti į README.md)
             Console.WriteLine("## Lab 1");
             Console.WriteLine("");
-            Console.WriteLine("**Vardas Pavardė:** Edgaras Mitkus");
+            Console.WriteLine("**Vardas Pavardė:**");
             Console.WriteLine("**Grupė:** PS-5");
             Console.WriteLine("**Paskaitos data:** 2026-02-14");
             Console.WriteLine($"**Random užduotis:** {task}");
