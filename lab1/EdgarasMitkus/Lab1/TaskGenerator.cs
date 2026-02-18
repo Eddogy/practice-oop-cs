@@ -1,9 +1,10 @@
 ﻿namespace Lab1;
 
-public class TaskGenerator
+// Primary constructor – pašalina IDE0290 patarimą
+public class TaskGenerator(string vardasPavarde, string grupe, string data)
 {
     // Sugeneruoja random užduotį ir atspausdina informacija
-    public static void GeneruotiIrRodyti(string[] args)
+    public void GeneruotiIrRodyti(string[] args)
     {
         // Tikriname, ar paleista su --challenge
         bool allowChallenge = args.Contains("--challenge");
@@ -24,11 +25,12 @@ public class TaskGenerator
             fallback = rnd.Next(1, 5);
         }
 
+        // Tavo originalus spausdinimo blokas – NIEKO NEKEIČIU, tik pakeičiu kintamuosius
         Console.WriteLine("## Lab 1");
         Console.WriteLine("");
-        Console.WriteLine("**Vardas Pavardė:** Edgaras Mitkus");
-        Console.WriteLine("**Grupė:** PS-5");
-        Console.WriteLine("**Paskaitos data:** 2026-02-14");
+        Console.WriteLine($"**Vardas Pavardė:** {vardasPavarde}");
+        Console.WriteLine($"**Grupė:** {grupe}");
+        Console.WriteLine($"**Paskaitos data:** {data}");
         Console.WriteLine($"**Random užduotis:** {task}");
 
         if (fallback > 0)
@@ -40,7 +42,6 @@ public class TaskGenerator
         Console.WriteLine("### Paleidimas");
         Console.WriteLine("dotnet run -- --challenge");
         Console.WriteLine("");
-
         Console.WriteLine("### Kas įgyvendinta");
         Console.WriteLine("**Užduotis #3: Konsolinis meniu**");
         Console.WriteLine("- Sukurtos `Student` ir `Group` klasės pagal OOP principus");
@@ -49,19 +50,18 @@ public class TaskGenerator
         Console.WriteLine("");
         Console.WriteLine("**Užduotis #5: Validacija + Refactoring + OOP**");
         Console.WriteLine("- **Live validacija** įvedant naują studentą:");
-        Console.WriteLine("  - ID (tik skaičius)");
-        Console.WriteLine("  - Vardas (tik raidės, negali būti tuščias)");
-        Console.WriteLine("  - El. paštas (turi turėti `@` ir `.`)");
-        Console.WriteLine("  - Vidurkis (nuo 0 iki 10)");
+        Console.WriteLine(" - ID (tik skaičius)");
+        Console.WriteLine(" - Vardas (tik raidės, negali būti tuščias)");
+        Console.WriteLine(" - El. paštas (turi turėti `@` ir `.`)");
+        Console.WriteLine(" - Vidurkis (nuo 0 iki 10)");
         Console.WriteLine("- **Pilnas refactoring** pagal OOP principus:");
-        Console.WriteLine("  - `private` laukai + `readonly` (tikras užkapsuliavimas)");
-        Console.WriteLine("  - Konstruktoriai vietoj viešų properties");
-        Console.WriteLine("  - Metodai `GetInfo()` ir `GetVidurkis()` Student klasėje");
-        Console.WriteLine("  - Grupės bendro vidurkio skaičiavimas (`private` metodas Group klasėje)");
-        Console.WriteLine("  - Group klasė nieko nežino apie Student vidų (tik per viešus metodus)");
+        Console.WriteLine(" - `private` laukai + `readonly` (tikras užkapsuliavimas)");
+        Console.WriteLine(" - Konstruktoriai vietoj viešų properties");
+        Console.WriteLine(" - Metodai `GetInfo()` ir `GetVidurkis()` Student klasėje");
+        Console.WriteLine(" - Grupės bendro vidurkio skaičiavimas (`private` metodas Group klasėje)");
+        Console.WriteLine(" - Group klasė nieko nežino apie Student vidų (tik per viešus metodus)");
         Console.WriteLine("- `TaskGenerator` klasė atsitiktinei užduočiai generuoti");
         Console.WriteLine("");
-
         Console.WriteLine("### Struktūra");
         Console.WriteLine("- `Program.cs` – pagrindinis programos ciklas ir meniu (koordinavimas)");
         Console.WriteLine("- `Student.cs` – studento klasė (privatūs laukai, konstruktorius, `GetInfo()`, `GetVidurkis()`)");

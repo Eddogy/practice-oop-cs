@@ -1,7 +1,7 @@
 ﻿using Lab1;
 
 // Atsitiktinės užduoties generavimas
-TaskGenerator.GeneruotiIrRodyti(args);
+new TaskGenerator("Edgaras Mitkus", "PS-5", "2026-02-14").GeneruotiIrRodyti(args);
 
 Group grupe = new("PS-5");
 
