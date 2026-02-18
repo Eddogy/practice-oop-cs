@@ -1,11 +1,20 @@
 ﻿namespace Lab1;
 
-public class Student
+// Konstruktorius (primary)
+public class Student(int id, string vardas, string elPastas, double vidurkis)
 {
-        // Savybės
-        public int Id { get; set; }
-        public string Vardas { get; set; } = "";
+    // Viskas Private
+    private readonly int id = id;
+    private readonly string vardas = vardas;
+    private readonly string elPastas = elPastas;
+    private readonly double vidurkis = vidurkis;
 
-        public string ElPastas { get; set; } = "";
-        public double Vidurkis { get; set; }
- }
+    // Viešas metodas spausdinimui
+    public string GetInfo()
+    {
+        return $"ID: {id}, Vardas: {vardas}, El.paštas: {elPastas}, Vidurkis: {vidurkis:F2}";
+    }
+
+    // Gauti vidurkį
+    public double GetVidurkis() => vidurkis;
+}

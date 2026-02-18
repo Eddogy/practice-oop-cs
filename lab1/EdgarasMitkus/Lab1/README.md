@@ -11,17 +11,27 @@ dotnet run -- --challenge
 
 ### Kas įgyvendinta
 **Užduotis #3: Konsolinis meniu**
-- Student ir Group klasės su properties
-- Meniu sistema (Add/Show/Exit)
-- Dinaminis studentų sąrašas (List<Student>)
+- Sukurtos `Student` ir `Group` klasės pagal OOP principus
+- Pilnas konsolinis meniu (1 - Pridėti, 2 - Rodyti, 0 - Išeiti)
+- Dinaminis studentų sąrašas (`List<Student>`)
 
-**Užduotis #5: Validacija + Refactoring**
-- Live validacija: ID, vardas, el. paštas (@, .), vidurkis (0-10)
-- Refactoring: logika perkelta iš Program.cs į klases
-- TaskGenerator klasė random užduoties generavimui
+**Užduotis #5: Validacija + Refactoring + OOP**
+- **Live validacija** įvedant naują studentą:
+  - ID (tik skaičius)
+  - Vardas (tik raidės, negali būti tuščias)
+  - El. paštas (turi turėti `@` ir `.`)
+  - Vidurkis (nuo 0 iki 10)
+- **Pilnas refactoring** pagal OOP principus:
+  - `private` laukai + `readonly` (tikras užkapsuliavimas)
+  - Konstruktoriai vietoj viešų properties
+  - Metodai `GetInfo()` ir `GetVidurkis()` Student klasėje
+  - Grupės bendro vidurkio skaičiavimas (`private` metodas Group klasėje)
+  - Group klasė nieko nežino apie Student vidų (tik per viešus metodus)
+- `TaskGenerator` klasė atsitiktinei užduočiai generuoti
 
 ### Struktūra
-- `Program.cs` - koordinavimas
-- `Student.cs` - studentas (savybės)
-- `Group.cs` - grupė su validacija ir metodais
-- `TaskGenerator.cs` - atsitiktinės užduoties generavimas
+- `Program.cs` – pagrindinis programos ciklas ir meniu (koordinavimas)
+- `Student.cs` – studento klasė (privatūs laukai, konstruktorius, `GetInfo()`, `GetVidurkis()`)
+- `Group.cs` – grupės klasė (privatūs laukai, konstruktorius, validacija, vidurkio skaičiavimas)
+- `Group.cs` – grupės klasė (privatūs laukai, konstruktorius, validacija, vidurkio skaičiavimas)
+- `TaskGenerator.cs` – atsitiktinės užduoties generavimas

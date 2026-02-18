@@ -3,8 +3,7 @@
 // Atsitiktinės užduoties generavimas
 TaskGenerator.GeneruotiIrRodyti(args);
 
-// UŽDUOTIS #3
-Group grupe = new() { Pavadinimas = "PS-5" };
+Group grupe = new("PS-5");
 
 Console.WriteLine("\n\nUŽDUOTIS #3 ir #5: Studentų valdymas + validacija");
 

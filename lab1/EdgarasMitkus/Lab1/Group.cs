@@ -1,120 +1,90 @@
 ﻿namespace Lab1;
 
-public class Group
+// Konstruktorius (primary)
+public class Group(string pavadinimas)
+{
+    private readonly string pavadinimas = pavadinimas;
+    private readonly List<Student> studentai = [];
+
+    // Metodas pridėti studentą
+    public void PridetiStudenta(Student studentas)
     {
-        public string Pavadinimas { get; set; } = "";
-
-        // Sąrašas studentų (List = dinaminis masyvas)
-        public List<Student> Studentai { get; set; } = [];
-
-        // Metodas: pridėti studentą į grupę
-        public void PridetiStudenta(Student studentas)
-        {
-            Studentai.Add(studentas);
-        }
-
-        // Metodas: parodyti visus studentus
-        public void RodytiVisus()
-        {
-            Console.WriteLine("\nStudentai grupėje: " + Pavadinimas);
-
-            if (Studentai.Count == 0)
-            {
-                Console.WriteLine("Nėra studentų!");
-                return;
-            }
-
-            foreach (Student s in Studentai)
-            {
-                Console.WriteLine($"ID: {s.Id}, Vardas: {s.Vardas}, El.paštas: {s.ElPastas}, Vidurkis: {s.Vidurkis}");
-            }
-        }
-
-        // UŽDUOTIS #5
-        // Metodas: pridėti naują studentą su validacija
-        public void PridetiNaujaStudenta()
-        {
-            Console.WriteLine("\nNaujas studentas");
-
-            // ID įvedimas su validacija
-            int id;
-            while (true)
-            {
-                Console.Write("Įvesk ID: ");
-                string input = Console.ReadLine() ?? "";
-
-                if (int.TryParse(input, out id))
-                {
-                    break;
-                }
-                else
-                {
-                    Console.WriteLine("KLAIDA: ID turi būti skaičius!");
-                }
-            }
-
-            // Vardo įvedimas su validacija
-            string vardas;
-            while (true)
-            {
-                Console.Write("Įvesk vardą: ");
-                vardas = Console.ReadLine() ?? "";
-
-                if (!string.IsNullOrWhiteSpace(vardas) && !vardas.Any(char.IsDigit))
-                {
-                    break;
-                }
-                else
-                {
-                    Console.WriteLine("KLAIDA: Vardas turi būti žodis");
-                }
-            }
-
-            // El. pašto įvedimas su validacija
-            string elpastas;
-            while (true)
-            {
-                Console.Write("Įvesk el. paštą: ");
-                elpastas = Console.ReadLine() ?? "";
-
-                if (elpastas.Contains('@') && elpastas.Contains('.'))
-                {
-                    break;
-                }
-                else
-                {
-                    Console.WriteLine("KLAIDA: El. paštas turi turėti @ ir . (pvz: vardas@gmail.com)!");
-                }
-            }
-
-            // Vidurkio įvedimas su validacija
-            double vidurkis;
-            while (true)
-            {
-                Console.Write("Įvesk vidurkį: ");
-                string input = Console.ReadLine() ?? "";
-
-                if (double.TryParse(input, out vidurkis) && vidurkis >= 0 && vidurkis <= 10)
-                {
-                    break;
-                }
-                else
-                {
-                    Console.WriteLine("KLAIDA: Vidurkis turi būti skaičius nuo 0 iki 10!");
-                }
-            }
-
-            // Sukuriame studentą
-            Student naujas = new()
-            {
-                Id = id,
-                Vardas = vardas,
-                ElPastas = elpastas,
-                Vidurkis = vidurkis
-            };
-
-            // Pridedame į sąrašą
-            Studentai.Add(naujas);
-            Console.WriteLine("\nstudentas pridėtas!");
-        }
+        studentai.Add(studentas);
     }
+
+    // Metodas: parodyti visus studentus
+    public void RodytiVisus()
+    {
+        Console.WriteLine($"\nStudentai grupėje: {pavadinimas}");
+
+        if (studentai.Count == 0)
+        {
+            Console.WriteLine("Nėra studentų!");
+            return;
+        }
+
+        foreach (Student s in studentai)
+        {
+            Console.WriteLine(s.GetInfo());
+        }
+
+        Console.WriteLine($"Grupės bendras vidurkis: {SkaiciuotiVidurki():F2}");
+    }
+
+    // Private metodas
+    private double SkaiciuotiVidurki()
+    {
+        if (studentai.Count == 0) return 0;
+        return studentai.Average(s => s.GetVidurkis());
+    }
+
+    // UŽDUOTIS #5
+    // Metodas: pridėti naują studentą su validacija
+    public void PridetiNaujaStudenta()
+    {
+        Console.WriteLine("\nNaujas studentas");
+
+        // ID
+        int id;
+        while (true)
+        {
+            Console.Write("Įvesk ID: ");
+            if (int.TryParse(Console.ReadLine(), out id)) break;
+            Console.WriteLine("KLAIDA: ID turi būti skaičius!");
+        }
+
+        // Vardas
+        string vardas;
+        while (true)
+        {
+            Console.Write("Įvesk vardą: ");
+            vardas = Console.ReadLine() ?? "";
+            if (!string.IsNullOrWhiteSpace(vardas) && !vardas.Any(char.IsDigit)) break;
+            Console.WriteLine("KLAIDA: Vardas turi būti žodis be skaičių!");
+        }
+
+        // El. paštas
+        string elpastas;
+        while (true)
+        {
+            Console.Write("Įvesk el. paštą: ");
+            elpastas = Console.ReadLine() ?? "";
+            if (elpastas.Contains('@') && elpastas.Contains('.')) break;
+            Console.WriteLine("KLAIDA: El. paštas turi turėti @ ir . !");
+        }
+
+        // Vidurkis
+        double vidurkis;
+        while (true)
+        {
+            Console.Write("Įvesk vidurkį: ");
+            if (double.TryParse(Console.ReadLine(), out vidurkis) && vidurkis >= 0 && vidurkis <= 10) break;
+            Console.WriteLine("KLAIDA: Vidurkis nuo 0 iki 10!");
+        }
+
+        // Sukuriame per konstruktorių (jau ne object initializer)
+        Student naujas = new(id, vardas, elpastas, vidurkis);
+        PridetiStudenta(naujas);   // naudojame savo metodą
+        Console.WriteLine("\nStudentas pridėtas!");
+    }
+}
