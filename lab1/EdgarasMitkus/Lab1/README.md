@@ -21,17 +21,22 @@ dotnet run -- --challenge
   - Vardas (tik raidės, negali būti tuščias)
   - El. paštas (turi turėti `@` ir `.`)
   - Vidurkis (nuo 0 iki 10)
-- **Pilnas refactoring** pagal OOP principus:
-  - `private` laukai + `readonly` (tikras užkapsuliavimas)
-  - Konstruktoriai vietoj viešų properties
-  - Metodai `GetInfo()` ir `GetVidurkis()` Student klasėje
-  - Grupės bendro vidurkio skaičiavimas (`private` metodas Group klasėje)
-  - Group klasė nieko nežino apie Student vidų (tik per viešus metodus)
+- **Pilnas refactoring** pagal Model / Service / Program architektūrą:
+  - `Model` – tik duomenys, nė vieno `Console`
+  - `Service` – veiksmai su duomenimis (pridėti, skaičiuoti vidurkį)
+  - `Program` – visa Console logika, validacija, meniu
+  - `private` laukai pakeisti į `public { get; }` kur reikia Service prieigos
+  - Konstruktoriai su primary constructor sintakse (.NET 10)
 - `TaskGenerator` klasė atsitiktinei užduočiai generuoti
 
 ### Struktūra
-- `Program.cs` – pagrindinis programos ciklas ir meniu (koordinavimas)
-- `Student.cs` – studento klasė (privatūs laukai, konstruktorius, `GetInfo()`, `GetVidurkis()`)
-- `Group.cs` – grupės klasė (privatūs laukai, konstruktorius, validacija, vidurkio skaičiavimas)
-- `Group.cs` – grupės klasė (privatūs laukai, konstruktorius, validacija, vidurkio skaičiavimas)
-- `TaskGenerator.cs` – atsitiktinės užduoties generavimas
+
+Lab1/
+├── Program.cs             `– UI (Console, meniu, validacija)`
+├── Models/
+│   ├── Student.cs         `– Model (duomenys: id, vardas, el. paštas, vidurkis)`
+│   └── Group.cs           `– Model (duomenys: pavadinimas, studentų sąrašas)`
+├── Services/
+│   └── GroupService.cs    `– Service (pridėti studentą, skaičiuoti vidurkį)`
+└── Utilities/
+    └── TaskGenerator.cs   `– pagalbinis įrankis atsitiktinei užduočiai generuoti`

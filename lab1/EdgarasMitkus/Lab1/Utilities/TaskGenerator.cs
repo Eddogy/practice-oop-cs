@@ -1,4 +1,4 @@
-﻿namespace Lab1;
+﻿namespace Lab1.Utilities;
 
 // Primary constructor – pašalina IDE0290 patarimą
 public class TaskGenerator(string vardasPavarde, string grupe, string data)

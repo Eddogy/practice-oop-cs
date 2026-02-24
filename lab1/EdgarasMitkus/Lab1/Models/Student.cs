@@ -1,4 +1,4 @@
-﻿namespace Lab1;
+﻿namespace Lab1.Models;
 
 // Konstruktorius (primary)
 public class Student(int id, string vardas, string elPastas, double vidurkis)
